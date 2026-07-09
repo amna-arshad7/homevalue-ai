@@ -8,6 +8,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import os
 import plotly.graph_objects as go
 
 # ----------------------------
@@ -22,15 +23,23 @@ st.set_page_config(
 # ----------------------------
 # Load Artifacts
 # ----------------------------
+# Build paths relative to THIS script's location, not the current working
+# directory - Streamlit Cloud runs the app from the repo root, so plain
+# filenames like 'lasso_model.pkl' would fail to resolve to app/lasso_model.pkl
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def _path(filename):
+    return os.path.join(APP_DIR, filename)
+
 @st.cache_resource
 def load_artifacts():
-    model = joblib.load('lasso_model.pkl')
-    scaler = joblib.load('scaler.pkl')
-    feature_columns = joblib.load('feature_columns.pkl')
-    default_row = joblib.load('default_row.pkl')
-    neighborhood_options = joblib.load('neighborhood_options.pkl')
-    feature_stats = joblib.load('feature_stats.pkl')
-    train_price_bounds = joblib.load('train_price_bounds.pkl')
+    model = joblib.load(_path('lasso_model.pkl'))
+    scaler = joblib.load(_path('scaler.pkl'))
+    feature_columns = joblib.load(_path('feature_columns.pkl'))
+    default_row = joblib.load(_path('default_row.pkl'))
+    neighborhood_options = joblib.load(_path('neighborhood_options.pkl'))
+    feature_stats = joblib.load(_path('feature_stats.pkl'))
+    train_price_bounds = joblib.load(_path('train_price_bounds.pkl'))
     return model, scaler, feature_columns, default_row, neighborhood_options, feature_stats, train_price_bounds
 
 try:
