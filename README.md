@@ -1,4 +1,4 @@
-#  House Price Prediction — Ames Housing Dataset
+#  HomeValue-AI
 
 An end-to-end regression project that predicts residential home sale prices using the Ames Housing dataset (Kaggle), covering the complete machine learning workflow — from raw, messy data to a deployed, interactive prediction app.
 
